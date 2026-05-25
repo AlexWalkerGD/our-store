@@ -1,0 +1,29 @@
+import { Category } from "@prisma/client";
+import Image from "next/image";
+
+interface CategoryItemProps {
+  category: Category;
+}
+
+const CategoryItem = ({ category }: CategoryItemProps) => {
+  return (
+    <div className="flex flex-col">
+      <div className="flex h-[150px] w-full items-center justify-center bg-gradient-to-r from-[#5033c3] to-[#5033c34f]">
+        <Image
+          src={category.imageUrl}
+          alt={category.name}
+          height={0}
+          width={0}
+          sizes="100vw"
+          className="h-auto max-h-[70%] w-auto max-w-[80%]"
+          style={{ objectFit: "contain" }}
+        />
+      </div>
+      <div className="bg-accent rounded-br-lg rounded-bl-lg py-3">
+        <p className="text-center text-sm font-semibold">{category.name}</p>
+      </div>
+    </div>
+  );
+};
+
+export default CategoryItem;
