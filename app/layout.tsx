@@ -39,7 +39,10 @@ export default function RootLayout({
           <AuthProvider>
             <Header />
             <div className="flex-1">{children}</div>
-            <Footer />
+
+            <footer>
+              <Footer />
+            </footer>
           </AuthProvider>
         </div>
       </body>
