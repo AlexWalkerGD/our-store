@@ -1,15 +1,50 @@
+"use client";
+
 import { ShoppingCartIcon } from "lucide-react";
 import { Badge } from "./badge";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "@/providers/cart";
 import CartItem from "./cart-item";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { Separator } from "./separator";
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
+import { createCheckout } from "@/app/actions/checkout";
 
 const Cart = () => {
   const { products, subTotal, total, totalDiscount } = useContext(CartContext);
+  const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  const handleFinishPurchaseClick = async () => {
+    if (products.length === 0 || isCreatingCheckout) {
+      return;
+    }
+
+    setIsCreatingCheckout(true);
+    setCheckoutError(null);
+
+    try {
+      const checkout = await createCheckout(
+        products.map((product) => ({
+          name: product.name,
+          description: product.description,
+          imageUrls: product.imageUrls,
+          totalPrice: product.totalPrice,
+          quantity: product.quantity,
+        })),
+      );
+
+      window.location.assign(checkout.checkoutUrl);
+    } catch (error) {
+      setCheckoutError(
+        error instanceof Error
+          ? error.message
+          : "Não foi possí­vel iniciar o checkout.",
+      );
+      setIsCreatingCheckout(false);
+    }
+  };
 
   return (
     <div className="flex h-full flex-col gap-8 p-5">
@@ -26,10 +61,9 @@ const Cart = () => {
           <div className="flex h-full flex-col gap-8">
             {products.length > 0 ? (
               products.map((product) => (
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 <CartItem
                   key={product.id}
-                  product={computeProductTotalPrice(product as any) as any}
+                  product={computeProductTotalPrice(product)}
                 />
               ))
             ) : (
@@ -70,7 +104,18 @@ const Cart = () => {
           <p>€ {total.toFixed(2)}</p>
         </div>
 
-        <Button className="mt-7 font-bold uppercase">Finalizar compra</Button>
+        <Button
+          className="mt-7 font-bold uppercase"
+          disabled={products.length === 0 || isCreatingCheckout}
+          onClick={handleFinishPurchaseClick}
+        >
+          {isCreatingCheckout ? "Redirecionando..." : "Finalizar compra"}
+        </Button>
+        {checkoutError && (
+          <p className="text-destructive text-center text-sm">
+            {checkoutError}
+          </p>
+        )}
       </div>
     </div>
   );
