@@ -10,7 +10,10 @@ interface CheckoutProduct {
   quantity: number;
 }
 
-export const createCheckout = async (products: CheckoutProduct[]) => {
+export const createCheckout = async (
+  products: CheckoutProduct[],
+  orderId: string,
+) => {
   if (products.length === 0) {
     throw new Error("Carrinho vazio.");
   }
@@ -24,6 +27,9 @@ export const createCheckout = async (products: CheckoutProduct[]) => {
     mode: "payment",
     success_url: process.env.HOST_URL,
     cancel_url: process.env.HOST_URL,
+    metadata: {
+      orderId,
+    },
     line_items: products.map((product) => {
       return {
         price_data: {

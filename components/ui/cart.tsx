@@ -28,11 +28,11 @@ const Cart = () => {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await createOrder(products, (data?.user as any).id);
-
     setIsCreatingCheckout(true);
     setCheckoutError(null);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const order = await createOrder(products, (data.user as any).id);
 
     try {
       const checkout = await createCheckout(
@@ -43,6 +43,7 @@ const Cart = () => {
           totalPrice: product.totalPrice,
           quantity: product.quantity,
         })),
+        order.id,
       );
 
       window.location.assign(checkout.checkoutUrl);
