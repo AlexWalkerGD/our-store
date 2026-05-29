@@ -75,48 +75,50 @@ const Cart = () => {
         </ScrollArea>
       </div>
 
-      <div className="flex flex-col gap-3">
-        <Separator />
+      {products.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <Separator />
 
-        <div className="flex items-center justify-between text-sm">
-          <p>Subtotal</p>
-          <p>€ {subTotal.toFixed(2)}</p>
+          <div className="flex items-center justify-between text-sm">
+            <p>Subtotal</p>
+            <p>€ {subTotal.toFixed(2)}</p>
+          </div>
+
+          <Separator />
+
+          <div className="flex items-center justify-between text-sm">
+            <p>Porte</p>
+            <p>Grátis</p>
+          </div>
+
+          <Separator />
+
+          <div className="flex items-center justify-between text-sm">
+            <p>Descontos</p>
+            <p>- € {totalDiscount.toFixed(2)}</p>
+          </div>
+
+          <Separator />
+
+          <div className="flex items-center justify-between text-base font-bold">
+            <p>Total</p>
+            <p>€ {total.toFixed(2)}</p>
+          </div>
+
+          <Button
+            className="mt-7 font-bold uppercase"
+            disabled={products.length === 0 || isCreatingCheckout}
+            onClick={handleFinishPurchaseClick}
+          >
+            {isCreatingCheckout ? "Redirecionando..." : "Finalizar compra"}
+          </Button>
+          {checkoutError && (
+            <p className="text-destructive text-center text-sm">
+              {checkoutError}
+            </p>
+          )}
         </div>
-
-        <Separator />
-
-        <div className="flex items-center justify-between text-sm">
-          <p>Porte</p>
-          <p>Grátis</p>
-        </div>
-
-        <Separator />
-
-        <div className="flex items-center justify-between text-sm">
-          <p>Descontos</p>
-          <p>- € {totalDiscount.toFixed(2)}</p>
-        </div>
-
-        <Separator />
-
-        <div className="flex items-center justify-between text-base font-bold">
-          <p>Total</p>
-          <p>€ {total.toFixed(2)}</p>
-        </div>
-
-        <Button
-          className="mt-7 font-bold uppercase"
-          disabled={products.length === 0 || isCreatingCheckout}
-          onClick={handleFinishPurchaseClick}
-        >
-          {isCreatingCheckout ? "Redirecionando..." : "Finalizar compra"}
-        </Button>
-        {checkoutError && (
-          <p className="text-destructive text-center text-sm">
-            {checkoutError}
-          </p>
-        )}
-      </div>
+      )}
     </div>
   );
 };
