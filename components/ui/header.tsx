@@ -55,7 +55,7 @@ const Header = () => {
                 <AvatarFallback>
                   {data.user.name?.[0].toUpperCase()}
                 </AvatarFallback>
-                {data.user.image && <AvatarImage></AvatarImage>}
+                {data.user.image && <AvatarImage src={data.user.image} />}
               </Avatar>
               <p className="font-medium">{data.user.name}</p>
             </div>
@@ -95,15 +95,16 @@ const Header = () => {
               Ofertas
             </Button>
             <SheetClose asChild>
-              <Link href="/catalog">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start gap-2"
-                >
+              <Button
+                asChild
+                variant="outline"
+                className="w-full justify-start gap-2"
+              >
+                <Link href="/catalog">
                   <ListOrderedIcon size={16} />
                   Catálogo
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </SheetClose>
           </div>
         </SheetContent>
@@ -116,13 +117,16 @@ const Header = () => {
       </Link>
 
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Button size="icon" variant="outline">
             <ShoppingCartIcon />
           </Button>
         </SheetTrigger>
 
         <SheetContent>
+          <SheetHeader className="sr-only">
+            <SheetTitle>Carrinho</SheetTitle>
+          </SheetHeader>
           <Cart />
         </SheetContent>
       </Sheet>
