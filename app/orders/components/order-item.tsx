@@ -8,6 +8,9 @@ import { Card } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";
 import { format } from "date-fns";
 import OrderProductItem from "./order-product-item";
+import { Separator } from "@/components/ui/separator";
+import { useMemo } from "react";
+import { computeProductTotalPrice } from "@/helpers/product";
 
 interface OrderItemsProps {
   order: Prisma.OrderGetPayload<{
@@ -22,6 +25,23 @@ interface OrderItemsProps {
 }
 
 const OrderItem = ({ order }: OrderItemsProps) => {
+  const subtotal = useMemo(() => {
+    return order.orderProducts.reduce((acc, orderProduct) => {
+      return (
+        acc + Number(orderProduct.product.basePrice) * orderProduct.quantity
+      );
+    }, 0);
+  }, [order.orderProducts]);
+
+  const total = useMemo(() => {
+    return order.orderProducts.reduce((acc, product) => {
+      const productWithTotalPrice = computeProductTotalPrice(product.product);
+      return acc + productWithTotalPrice.totalPrice * product.quantity;
+    }, 0);
+  }, [order.orderProducts]);
+
+  const totalDiscount = subtotal - total;
+
   return (
     <Card className="px-5">
       <Accordion type="single" className="w-full" collapsible>
@@ -56,6 +76,36 @@ const OrderItem = ({ order }: OrderItemsProps) => {
                   orderProduct={orderProduct}
                 />
               ))}
+
+              <div className="flex w-full flex-col text-xs">
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Subtotal</p>
+                  <p>€{subtotal.toFixed(2)}</p>
+                </div>
+
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Porte</p>
+                  <p>Grátis</p>
+                </div>
+
+                <Separator />
+
+                <div className="flex w-full justify-between py-3">
+                  <p>Descontos</p>
+                  <p>- €{totalDiscount.toFixed(2)}</p>
+                </div>
+
+                <Separator />
+
+                <div className="flex w-full justify-between py-3 text-sm font-bold">
+                  <p>Total</p>
+                  <p>€{total.toFixed(2)}</p>
+                </div>
+              </div>
             </div>
           </AccordionContent>
         </AccordionItem>
