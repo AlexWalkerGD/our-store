@@ -10,16 +10,26 @@ import { Separator } from "./separator";
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
 import { createCheckout } from "@/app/actions/checkout";
+import { useSession } from "next-auth/react";
+import { createOrder } from "@/app/actions/order";
 
 const Cart = () => {
+  const { data } = useSession();
   const { products, subTotal, total, totalDiscount } = useContext(CartContext);
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   const handleFinishPurchaseClick = async () => {
+    if (!data?.user) {
+      return;
+    }
+
     if (products.length === 0 || isCreatingCheckout) {
       return;
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await createOrder(products, (data?.user as any).id);
 
     setIsCreatingCheckout(true);
     setCheckoutError(null);
