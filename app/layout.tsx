@@ -6,6 +6,7 @@ import Header from "@/components/ui/header";
 import { AuthProvider } from "@/providers/auth";
 import Footer from "@/components/ui/footer";
 import CartProvider from "@/providers/cart";
+import ToastProvider from "@/providers/toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +37,11 @@ export default function RootLayout({
         <div className="flex h-full w-full flex-col">
           <AuthProvider>
             <CartProvider>
-              <Header />
-              <div className="flex-1">{children}</div>
-              <Footer />
+              <ToastProvider>
+                <Header />
+                <div className="flex-1">{children}</div>
+                <Footer />
+              </ToastProvider>
             </CartProvider>
           </AuthProvider>
         </div>

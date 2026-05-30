@@ -47,7 +47,7 @@ const OrderItem = ({ order }: OrderItemsProps) => {
     <Card className="px-5">
       <Accordion type="single" className="w-full" collapsible>
         <AccordionItem value={order.id}>
-          <AccordionTrigger>
+          <AccordionTrigger className="cursor-pointer">
             <div className="flex flex-col gap-1 text-left">
               Pedido com {order.orderProducts.length} produto(s)
             </div>
