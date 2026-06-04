@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   LayoutDashboardIcon,
@@ -5,8 +7,12 @@ import {
   PackageIcon,
   PackageSearchIcon,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const path = usePathname();
+
   return (
     <div className="bg-background border-accent flex min-w-75 flex-col items-center gap-8 border-r border-solid p-5">
       <h1 className="text-lg font-semibold">
@@ -17,10 +23,15 @@ const Sidebar = () => {
           <LayoutDashboardIcon size={16} />
           Dashboard
         </Button>
-        <Button className="flex w-full justify-start gap-2" variant="outline">
-          <PackageIcon size={16} />
-          Produtos
-        </Button>
+        <Link href="/dashboard/products">
+          <Button
+            variant="outline"
+            className={`gap-2" flex w-full justify-start ${path.includes("/products") && "bg-primary hover:bg-primary text-white"}`}
+          >
+            <PackageIcon size={16} />
+            Produtos
+          </Button>
+        </Link>
         <Button className="flex w-full justify-start gap-2" variant="outline">
           <ListOrderedIcon size={16} />
           Categorias
