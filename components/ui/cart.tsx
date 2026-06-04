@@ -9,9 +9,9 @@ import { computeProductTotalPrice } from "@/helpers/product";
 import { Separator } from "./separator";
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
-import { createCheckout } from "@/app/actions/checkout";
+import { createCheckout } from "@/app/(shop)/actions/checkout";
 import { useSession } from "next-auth/react";
-import { createOrder } from "@/app/actions/order";
+import { createOrder } from "@/app/(shop)/actions/order";
 
 const Cart = () => {
   const { data } = useSession();
