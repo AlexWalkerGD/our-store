@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from "@/components/ui/badge";
 import { prismaClient } from "@/lib/prisma";
 import {
@@ -12,8 +13,16 @@ import {
 import ProductItem from "./components/product-item";
 import { computeProductTotalPrice } from "@/helpers/product";
 import CategoriesList from "./components/categories-list";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 const Dashboard = async () => {
+  const user = getServerSession(authOptions);
+
+  if (!user) {
+    return <p>Acesso Negado</p>;
+  }
+
   const products = await prismaClient.product.findMany({
     include: {
       category: {
@@ -35,6 +44,9 @@ const Dashboard = async () => {
   });
 
   const orders = await prismaClient.order.findMany({
+    where: {
+      userId: (user as any).id,
+    },
     include: {
       orderProducts: {
         include: {

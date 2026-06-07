@@ -1,10 +1,22 @@
 import OrderItem from "@/components/order-item";
 import { Badge } from "@/components/ui/badge";
+import { authOptions } from "@/lib/auth";
 import { prismaClient } from "@/lib/prisma";
 import { PackageSearchIcon } from "lucide-react";
+import { getServerSession } from "next-auth";
 
 const OrderPage = async () => {
+  const user = getServerSession(authOptions);
+
+  if (!user) {
+    return <p>Acesso Negado</p>;
+  }
+
   const orders = await prismaClient.order.findMany({
+    where: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      userId: (user as any).id,
+    },
     include: {
       orderProducts: {
         include: {
