@@ -14,7 +14,7 @@ const Sidebar = () => {
   const path = usePathname();
 
   return (
-    <div className="flex min-w-[300px] flex-col items-center gap-8 border-r border-solid border-gray-400 p-5">
+    <div className="border-accent flex min-w-[300px] flex-col items-center gap-8 border-r border-solid p-5">
       <h1 className="text-lg font-semibold">
         <span className="text-primart">Our</span> Store
       </h1>
