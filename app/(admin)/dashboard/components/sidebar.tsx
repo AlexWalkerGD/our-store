@@ -19,10 +19,15 @@ const Sidebar = () => {
         <span className="text-primart">Our</span> Store
       </h1>
       <div className="flex w-full flex-col gap-3">
-        <Button className="flex w-full justify-start gap-2" variant="outline">
-          <LayoutDashboardIcon size={16} />
-          Dashboard
-        </Button>
+        <Link href="/dashboard">
+          <Button
+            variant="outline"
+            className={`gap-2" flex w-full justify-start ${path.endsWith("/dashboard") && "bg-primary hover:bg-primary text-white"}`}
+          >
+            <LayoutDashboardIcon size={16} />
+            Dashboard
+          </Button>
+        </Link>
         <Link href="/dashboard/products">
           <Button
             variant="outline"
