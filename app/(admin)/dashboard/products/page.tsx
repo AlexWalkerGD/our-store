@@ -1,10 +1,16 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { computeProductTotalPrice } from "@/helpers/product";
 import { prismaClient } from "@/lib/prisma";
 import { PackageIcon, PlusIcon } from "lucide-react";
+import ProductTable from "./components/products-table";
 
 const ProductsPage = async () => {
   const products = await prismaClient.product.findMany();
+
+  const productWithTotalPrice = products.map((product) =>
+    computeProductTotalPrice(product),
+  );
 
   return (
     <div className="flex flex-col gap-10 p-5">
@@ -23,9 +29,10 @@ const ProductsPage = async () => {
 
         <Button className="flex gap-2">
           <PlusIcon size={16} />
-          Adicionar producto
+          Adicionar produto
         </Button>
       </div>
+      <ProductTable products={productWithTotalPrice} />
     </div>
   );
 };
