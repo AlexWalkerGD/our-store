@@ -32,20 +32,20 @@ const ProductDetailsPage = async ({ params }: ProductDetailsPagePros) => {
 
   if (!product) return null;
 
-  const { category, ...productWithoutCategory } = product;
-
   return (
-    <div className="flex flex-col gap-8 pb-8">
-      <ProductImages imageUrls={product.imageUrls} name={product.name} />
-      <ProductInfo
-        product={{
-          ...product,
-          totalPrice: computeProductTotalPrice(product),
-        }}
-      />
-      <div>
+    <div className="flex flex-col gap-8 pb-8 lg:container lg:mx-auto lg:gap-10 lg:py-10">
+      <div className="flex flex-col gap-8 lg:flex-row lg:gap-9 lg:px-5">
+        <ProductImages imageUrls={product.imageUrls} name={product.name} />
+        <ProductInfo
+          product={{
+            ...product,
+            totalPrice: computeProductTotalPrice(product),
+          }}
+        />
+      </div>
+      <div className="flex flex-col gap-5">
         <SectionTitle>Produtos Recomendados</SectionTitle>
-        <ProductList products={category.products} />
+        <ProductList products={product.category.products} />
       </div>
     </div>
   );

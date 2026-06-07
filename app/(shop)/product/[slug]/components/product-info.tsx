@@ -40,22 +40,22 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   };
 
   return (
-    <div className="flex flex-col px-5">
-      <h2 className="text-lg">{product.name}</h2>
+    <div className="lg:bg-accent flex flex-col px-5 lg:w-[40%] lg:rounded-lg lg:p-10">
+      <h2 className="text-lg lg:text-2xl">{product.name}</h2>
 
       <div className="flex items-center gap-2">
-        <h1 className="text-xl font-bold">
+        <h1 className="text-xl font-bold lg:text-3xl">
           € {Number(product.totalPrice).toFixed(2)}{" "}
         </h1>
         {product.discountPercent > 0 && (
-          <Badge className="px-2 py-[2px]">
+          <Badge className="px-2 py-[2px] lg:text-base">
             <ArrowDownIcon size={14} /> {product.discountPercent}%
           </Badge>
         )}
       </div>
 
       {product.discountPercent > 0 && (
-        <p className="text-sm line-through opacity-75">
+        <p className="text-sm line-through opacity-75 lg:text-base">
           € {Number(product.basePrice).toFixed(2)}
         </p>
       )}
@@ -80,33 +80,32 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         </Button>
       </div>
 
-      <div className="mt-8 flex flex-col gap-3">
+      <div className="mt-8 flex flex-col gap-5">
         <h3 className="font-bold">Descrição</h3>
         <p className="text-justify text-sm opacity-60">{product.description}</p>
       </div>
 
-      <Button
-        className="mt-8 font-bold uppercase"
-        onClick={handleAddToCartClick}
-      >
-        Adicionar ao carrinho
-      </Button>
+      <div className="mt-8 flex flex-col gap-5">
+        <Button className="font-bold uppercase" onClick={handleAddToCartClick}>
+          Adicionar ao carrinho
+        </Button>
 
-      <div className="bg-accent mt-5 flex items-center justify-between rounded-lg px-5 py-2">
-        <div className="flex items-center gap-2">
-          <TruckIcon />
+        <div className="bg-accent flex items-center justify-between rounded-lg px-5 py-2 lg:bg-[#2A2A2A]">
+          <div className="flex items-center gap-2">
+            <TruckIcon />
 
-          <div className="flex flex-col">
-            <p className="text-xs">
-              Entrega via <span className="font-bold">Correios</span>
-            </p>
-            <p className="text-primary text-xs">
-              Envio para <span className="font-bold">Portugal</span>
-            </p>
+            <div className="flex flex-col">
+              <p className="text-xs">
+                Entrega via <span className="font-bold">Correios</span>
+              </p>
+              <p className="text-primary text-xs">
+                Envio para <span className="font-bold">Portugal</span>
+              </p>
+            </div>
           </div>
-        </div>
 
-        <p className="text-xs font-bold">Porte Grátis</p>
+          <p className="text-xs font-bold">Porte Grátis</p>
+        </div>
       </div>
     </div>
   );

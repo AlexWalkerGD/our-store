@@ -15,20 +15,19 @@ const ProductImages = ({ imageUrls, name }: ProductImagesProps) => {
     setCurrentImage(imageUrl);
   };
   return (
-    <div className="flex flex-col">
-      <div className="bg-accent flex h-[380px] w-full items-center justify-center">
+    <div className="flex flex-col lg:min-h-full lg:w-3/5">
+      <div className="bg-accent flex h-[380px] w-full items-center justify-center lg:h-full lg:rounded-lg">
         <Image
           src={currentImage}
           alt={name}
           height={0}
           width={0}
           sizes="100vw"
-          className="h-auto max-h-[70%] w-auto max-w-[80%]"
-          style={{ objectFit: "contain" }}
+          className="h-auto max-h-[70%] w-auto max-w-[80%] object-contain"
         />
       </div>
 
-      <div className="mt-8 grid grid-cols-4 gap-4 px-5">
+      <div className="mt-8 grid grid-cols-4 gap-4 px-5 lg:px-0">
         {imageUrls.map((imageUrl) => (
           <button
             key={imageUrl}
