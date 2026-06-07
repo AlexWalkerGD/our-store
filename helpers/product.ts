@@ -1,34 +1,18 @@
 import { Product } from "@prisma/client";
 
-type ProductPriceFields = {
-  basePrice: unknown;
-  discountPercent: number;
-};
+export interface ProductWithTotalPrice extends Product {
+  totalPrice: number;
+}
 
-export type ProductWithTotalPrice<T extends ProductPriceFields = Product> =
-  Omit<T, "basePrice"> & {
-    basePrice: number;
-    totalPrice: number;
-  };
-
-export const computeProductTotalPrice = <T extends ProductPriceFields>(
-  product: T,
-): ProductWithTotalPrice<T> => {
-  const basePrice = Number(product.basePrice);
-
+export const computeProductTotalPrice = (
+  product: Pick<Product, "discountPercent" | "basePrice">,
+): number => {
   if (product.discountPercent === 0) {
-    return {
-      ...product,
-      basePrice,
-      totalPrice: basePrice,
-    };
+    return Number(product.basePrice);
   }
 
-  const totalDiscount = basePrice * (product.discountPercent / 100);
+  const totalDiscount =
+    Number(product.basePrice) * (product.discountPercent / 100);
 
-  return {
-    ...product,
-    basePrice,
-    totalPrice: basePrice - totalDiscount,
-  };
+  return Number(product.basePrice) - totalDiscount;
 };

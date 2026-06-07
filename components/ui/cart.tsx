@@ -74,7 +74,10 @@ const Cart = () => {
               products.map((product) => (
                 <CartItem
                   key={product.id}
-                  product={computeProductTotalPrice(product)}
+                  product={{
+                    ...product,
+                    totalPrice: computeProductTotalPrice(product),
+                  }}
                 />
               ))
             ) : (
