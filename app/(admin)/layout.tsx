@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className="">
         <div className="flex h-full w-full flex-col">
           <AuthProvider>
-            <div className="flex">
+            <div className="flex overflow-hidden">
               <Sidebar />
               {children}
             </div>

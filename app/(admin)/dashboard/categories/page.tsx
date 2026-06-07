@@ -1,10 +1,19 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { prismaClient } from "@/lib/prisma";
-import { ListOrderedIcon, PackageIcon, PlusIcon } from "lucide-react";
+import { ListOrderedIcon, PlusIcon } from "lucide-react";
+import CategoriesTable from "./components/categories-table";
 
 const CategoriesPage = async () => {
-  const categories = prismaClient.category.findMany({});
+  const categories = await prismaClient.category.findMany({
+    include: {
+      products: {
+        select: {
+          id: true,
+        },
+      },
+    },
+  });
 
   return (
     <div className="flex min-w-0 flex-1 flex-col gap-4 p-5">
@@ -24,6 +33,7 @@ const CategoriesPage = async () => {
           Adicionar categoria
         </Button>
       </div>
+      <CategoriesTable categories={categories} />
     </div>
   );
 };
