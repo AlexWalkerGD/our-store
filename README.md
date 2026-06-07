@@ -4,179 +4,176 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Tech](https://img.shields.io/badge/tech-Next.js%2C_TypeScript%2C_PostgreSQL%2C_Stripe-informational)
 
-## 📖 Sobre o Projeto
+## 📖 About the Project
 
-**Our Store** é uma aplicação web de e-commerce desenvolvida com **Next.js**, **TypeScript**, **PostgreSQL**, **Prisma** e **Stripe**.
+**Our Store** is an e-commerce web application built with **Next.js**, **TypeScript**, **PostgreSQL**, **Prisma**, and **Stripe**.
 
-O projeto permite que usuários naveguem por produtos, explorem categorias, visualizem ofertas, adicionem itens ao carrinho e finalizem compras por meio de um checkout integrado com o Stripe. A aplicação também possui autenticação com Google e uma área administrativa para acompanhamento de produtos, categorias e pedidos.
+The project allows users to browse products, explore categories, view special offers, add items to their shopping cart, and complete purchases through a Stripe-powered checkout system. The application also includes Google authentication and an administrative dashboard for managing products, categories, and orders.
 
-Entre os principais recursos estão:
+Key features include:
 
-- Login com Google usando NextAuth.js
-- Catálogo de produtos organizado por categorias
-- Página de detalhes do produto com imagens, preço, desconto e descrição
-- Carrinho persistido no navegador com cálculo de subtotal, descontos e total
-- Checkout de pagamento com Stripe
-- Registro de pedidos no banco de dados
-- Atualização do status do pedido via webhook do Stripe
-- Página para o usuário visualizar seus pedidos
-- Dashboard administrativo com visão geral de produtos, categorias e pedidos
-- Interface responsiva com Tailwind CSS, Shadcn/UI e Radix UI
+* Google Sign-In with NextAuth.js
+* Product catalog organized by categories
+* Product details page with images, pricing, discounts, and descriptions
+* Persistent shopping cart with subtotal, discount, and total calculations
+* Stripe payment integration
+* Order registration and management
+* Automatic order status updates through Stripe webhooks
+* User order history page
+* Administrative dashboard with products, categories, and order insights
+* Responsive UI built with Tailwind CSS, Shadcn/UI, and Radix UI
 
-🔗 **Acesse o projeto online:** [adicione o link aqui](#)  
-📂 **Repositório no GitHub:** [adicione o link aqui](#)
+🔗 **Live Demo:** [Click here](https://our-store-xi.vercel.app/)
+
+📂 **GitHub Repository:** [Click here](https://github.com/AlexWalkerGD/our-store)
 
 ---
 
 ## 🖼️ Preview
 
-Adicione aqui as imagens do projeto depois de fazer upload no GitHub:
-
-```html
 <table>
+   <tr>
+     <td><img width="300" height="605" alt="Captura de tela 2026-06-08 001224" src="https://github.com/user-attachments/assets/4c813e2f-8d83-4529-bcca-5efbf7809093" /></td>
+     <td><img width="300" height="605" alt="Captura de tela 2026-06-08 001236" src="https://github.com/user-attachments/assets/30e669c6-499f-4cb7-84c0-c70f47846c6b" /></td>
+     <td><img width="300" height="605" alt="Captura de tela 2026-06-08 001248" src="https://github.com/user-attachments/assets/04a96068-743e-4750-92d0-3468739a0d39" /></td>
+     
+   </tr>
   <tr>
-    <td><img width="300" alt="Preview da home" src="COLE_A_URL_DA_IMAGEM_AQUI" /></td>
-    <td><img width="300" alt="Preview do produto" src="COLE_A_URL_DA_IMAGEM_AQUI" /></td>
-    <td><img width="300" alt="Preview do carrinho" src="COLE_A_URL_DA_IMAGEM_AQUI" /></td>
-  </tr>
-  <tr>
-    <td><img width="300" alt="Preview do checkout" src="COLE_A_URL_DA_IMAGEM_AQUI" /></td>
-    <td><img width="300" alt="Preview dos pedidos" src="COLE_A_URL_DA_IMAGEM_AQUI" /></td>
-    <td><img width="300" alt="Preview do dashboard" src="COLE_A_URL_DA_IMAGEM_AQUI" /></td>
+    <td><img width="300" height="605" alt="Captura de tela 2026-06-08 001312" src="https://github.com/user-attachments/assets/4aabbad6-b726-47b1-b5b0-af3de272cb1b" /></td>
+    <td><img width="300" height="605" alt="Captura de tela 2026-06-08 001324" src="https://github.com/user-attachments/assets/d7315d8c-a045-438a-acc7-0d97f9e60bb7" /></td>
+    <td><img width="300" height="605" alt="image" src="https://github.com/user-attachments/assets/c29a5155-02e0-4c56-a42f-c241edd550e3" />
+</td>
   </tr>
 </table>
-```
+
+## 🚀 Features
+
+* 🔑 User authentication with Google
+* 🏷️ Product listing by categories
+* 🔥 Deals page featuring discounted products
+* 🛒 Shopping cart with localStorage persistence
+* ➕ Product quantity management
+* 💰 Automatic subtotal, discount, and total calculations
+* 💳 Stripe Checkout integration
+* 📦 Order creation and tracking
+* ✅ Payment confirmation through Stripe webhooks
+* 📊 Administrative dashboard with product, category, and order data
+* 📱 Fully responsive design for different screen sizes
 
 ---
 
-## 🚀 Funcionalidades
+## 🛠️ Technologies and Libraries
 
-- 🔑 Autenticação de usuário com Google
-- 🏷️ Listagem de produtos por categorias
-- 🔥 Página de ofertas com produtos em desconto
-- 🛒 Carrinho de compras com persistência em `localStorage`
-- ➕ Controle de quantidade dos produtos no carrinho
-- 💰 Cálculo automático de subtotal, descontos e total
-- 💳 Checkout integrado com Stripe
-- 📦 Criação e acompanhamento de pedidos
-- ✅ Confirmação de pagamento via webhook do Stripe
-- 📊 Dashboard administrativo com informações de produtos, categorias e pedidos
-- 📱 Layout responsivo para diferentes tamanhos de tela
+### Frameworks & Languages
 
----
+* Next.js
+* React
+* TypeScript
+* HTML5 & CSS3
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
+### Styling & UI
 
-### Frameworks e Linguagens
+* Tailwind CSS
+* Shadcn/UI
+* Radix UI
+* Lucide React
+* Next Themes
 
-- Next.js
-- React
-- TypeScript
-- HTML5 & CSS3
+### Authentication
 
-### Estilização e UI
+* NextAuth.js
+* Google OAuth
+* Prisma Adapter
 
-- Tailwind CSS
-- Shadcn/UI
-- Radix UI
-- Lucide React
-- Next Themes
+### Database
 
-### Autenticação
+* PostgreSQL
+* Prisma ORM
 
-- NextAuth.js
-- Google OAuth
-- Prisma Adapter
+### Payments
 
-### Banco de Dados
+* Stripe Checkout
+* Stripe Webhooks
 
-- PostgreSQL
-- Prisma ORM
+### Utilities
 
-### Pagamentos
-
-- Stripe Checkout
-- Stripe Webhooks
-
-### Utilitários
-
-- date-fns
-- clsx
-- class-variance-authority
-- tailwind-merge
-- Sonner / React Toastify
+* date-fns
+* clsx
+* class-variance-authority
+* tailwind-merge
+* Sonner / React Toastify
 
 ---
 
-## 🧱 Estrutura Principal
+## 🧱 Main Project Structure
 
 ```bash
 app/
-  (shop)/        # Rotas públicas da loja
-  (admin)/       # Rotas do dashboard administrativo
-components/      # Componentes reutilizáveis da interface
-providers/       # Providers globais, como autenticação, carrinho e toast
-helpers/         # Funções auxiliares
-lib/             # Configurações compartilhadas, como Prisma
-prisma/          # Schema do banco de dados
+  (shop)/        # Public storefront routes
+  (admin)/       # Administrative dashboard routes
+components/      # Reusable UI components
+providers/       # Global providers such as authentication, cart, and notifications
+helpers/         # Helper functions
+lib/             # Shared configurations such as Prisma
+prisma/          # Database schema
 ```
 
 ---
 
-## ⚙️ Como Rodar Localmente
+## ⚙️ Running Locally
 
-1. Clone este repositório:
+### 1. Clone the repository
 
 ```bash
-git clone URL_DO_SEU_REPOSITORIO
+git clone YOUR_REPOSITORY_URL
 ```
 
-2. Acesse a pasta do projeto:
+### 2. Navigate to the project folder
 
 ```bash
 cd our-store
 ```
 
-3. Instale as dependências:
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-4. Crie um arquivo `.env` na raiz do projeto com as variáveis:
+### 4. Create a `.env` file in the project root
 
 ```bash
-DATABASE_URL="postgresql://usuario:senha@host:porta/nome_do_banco"
+DATABASE_URL="postgresql://user:password@host:port/database_name"
 
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="sua_chave_secreta"
-GOOGLE_CLIENT_ID="seu_google_client_id"
-GOOGLE_CLIENT_SECRET="seu_google_client_secret"
+NEXTAUTH_SECRET="your_secret_key"
+GOOGLE_CLIENT_ID="your_google_client_id"
+GOOGLE_CLIENT_SECRET="your_google_client_secret"
 
 HOST_URL="http://localhost:3000"
-STRIPE_SECRET_KEY="sua_stripe_secret_key"
-STRIPE_WEBHOOK_SECRET="seu_stripe_webhook_secret"
+STRIPE_SECRET_KEY="your_stripe_secret_key"
+STRIPE_WEBHOOK_SECRET="your_stripe_webhook_secret"
 ```
 
-5. Execute as migrations do banco de dados:
+### 5. Run database migrations
 
 ```bash
 npx prisma migrate dev
 ```
 
-6. Gere o Prisma Client:
+### 6. Generate the Prisma Client
 
 ```bash
 npx prisma generate
 ```
 
-7. Inicie o servidor de desenvolvimento:
+### 7. Start the development server
 
 ```bash
 npm run dev
 ```
 
-8. Abra no navegador:
+### 8. Open in your browser
 
 ```bash
 http://localhost:3000
@@ -184,32 +181,33 @@ http://localhost:3000
 
 ---
 
-## 💳 Stripe Webhook
+## 💳 Stripe Webhooks
 
-Para confirmar pagamentos localmente, configure o Stripe CLI e encaminhe os eventos para a rota:
+To test payment confirmations locally, configure the Stripe CLI and forward events to:
 
 ```bash
-stripe listen --forward-to localhost:3000/api/order/payment-sucess
+stripe listen --forward-to localhost:3000/api/order/payment-success
 ```
 
-Depois, copie o webhook secret gerado pelo Stripe CLI para a variável:
+Then copy the generated webhook secret into:
 
 ```bash
-STRIPE_WEBHOOK_SECRET="seu_stripe_webhook_secret"
+STRIPE_WEBHOOK_SECRET="your_stripe_webhook_secret"
 ```
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-Desenvolvido por **Alex Walker**
+Developed by **Alex Walker**
 
-💼 [GitHub](https://github.com/AlexWalkerGD)  
-📧 alexwalkerson@hotmail.com
+💼 GitHub: https://github.com/AlexWalkerGD
+📧 Email: [alexwalkerson@hotmail.com](mailto:alexwalkerson@hotmail.com)
 
 ---
 
-## 🪪 Licença
+## 🪪 License
 
-Este projeto está licenciado sob a licença MIT.  
-Sinta-se livre para usar, modificar e distribuir.
+This project is licensed under the MIT License.
+
+Feel free to use, modify, and distribute it.
