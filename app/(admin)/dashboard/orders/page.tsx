@@ -30,7 +30,7 @@ const OrderPage = async () => {
         </p>
       </div>
 
-      <div className="flex h-full flex-col overflow-auto">
+      <div className="flex flex-col gap-5 pt-5">
         {orders.map((order) => (
           <OrderItem key={order.id} order={order} />
         ))}
