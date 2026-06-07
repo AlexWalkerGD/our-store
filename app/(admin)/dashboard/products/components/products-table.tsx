@@ -35,8 +35,8 @@ const ProductTable = ({ products }: ProductTableProps) => {
           <TableRow key={product.id}>
             <TableCell>{product.name}</TableCell>
             <TableCell>{product.category.name}</TableCell>
-            <TableCell>{product.totalPrice.toFixed(2)}</TableCell>
-            <TableCell>{product.basePrice.toFixed(2)}</TableCell>
+            <TableCell>€ {product.totalPrice.toFixed(2)}</TableCell>
+            <TableCell>€ {product.basePrice.toFixed(2)}</TableCell>
             <TableCell>0</TableCell>
           </TableRow>
         ))}
