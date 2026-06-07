@@ -29,9 +29,10 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   };
 
   const handleAddToCartClick = () => {
+    toast.success("Adicionado ao carrinho com sucesso!", {
+      position: "top-center",
+    });
     addProductToCart({ ...product, quantity });
-
-    toast.success("Adicionado ao carrinho com sucesso!");
   };
 
   return (
