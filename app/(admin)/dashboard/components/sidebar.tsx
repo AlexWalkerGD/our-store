@@ -32,10 +32,15 @@ const Sidebar = () => {
             Produtos
           </Button>
         </Link>
-        <Button className="flex w-full justify-start gap-2" variant="outline">
-          <ListOrderedIcon size={16} />
-          Categorias
-        </Button>
+        <Link href="/dashboard/categories">
+          <Button
+            variant="outline"
+            className={`gap-2" flex w-full justify-start ${path.includes("/categories") && "bg-primary hover:bg-primary text-white"}`}
+          >
+            <ListOrderedIcon size={16} />
+            Categorias
+          </Button>
+        </Link>
         <Button className="flex w-full justify-start gap-2" variant="outline">
           <PackageSearchIcon size={16} />
           Pedidos
