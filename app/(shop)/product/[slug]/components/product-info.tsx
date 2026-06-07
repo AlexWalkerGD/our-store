@@ -11,7 +11,7 @@ import {
   TruckIcon,
 } from "lucide-react";
 import { useContext, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 interface ProductInfoProps {
   product: ProductWithTotalPrice;
@@ -31,12 +31,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const handleAddToCartClick = () => {
     addProductToCart({ ...product, quantity });
 
-    toast.success("Adicionado ao carrinho com sucesso!", {
-      position: "top-right",
-      autoClose: 2500,
-      theme: "dark",
-      pauseOnHover: false,
-    });
+    toast.success("Adicionado ao carrinho com sucesso!");
   };
 
   return (
