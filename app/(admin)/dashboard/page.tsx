@@ -15,6 +15,7 @@ import { computeProductTotalPrice } from "@/helpers/product";
 import CategoriesList from "./components/categories-list";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Dashboard = async () => {
   const user = getServerSession(authOptions);
@@ -50,7 +51,11 @@ const Dashboard = async () => {
     include: {
       orderProducts: {
         include: {
-          product: true,
+          product: {
+            include: {
+              category: true,
+            },
+          },
         },
       },
     },
@@ -63,6 +68,53 @@ const Dashboard = async () => {
       },
     },
   });
+
+  const salesByCategory: Record<string, number> = {};
+
+  for (const order of orders) {
+    for (const item of order.orderProducts) {
+      const categoryName = item.product.category.name;
+
+      salesByCategory[categoryName] =
+        (salesByCategory[categoryName] || 0) + item.quantity;
+    }
+  }
+
+  const salesByProduct: Record<string, number> = {};
+
+  for (const order of orders) {
+    for (const item of order.orderProducts) {
+      const productName = item.product.name;
+
+      salesByProduct[productName] =
+        (salesByProduct[productName] || 0) + item.quantity;
+    }
+  }
+
+  const sortedItems = Object.entries(salesByProduct).sort(
+    ([, a], [, b]) => b - a,
+  );
+
+  const productMap = new Map();
+
+  for (const order of orders) {
+    for (const item of order.orderProducts) {
+      productMap.set(item.product.name, item);
+    }
+  }
+
+  const totalSalesByCategory = Object.values(salesByCategory).reduce(
+    (acc, value) => acc + value,
+    0,
+  );
+
+  const result = Object.entries(salesByCategory)
+    .map(([category, quantity]) => ({
+      category,
+      quantity,
+      percentage: Math.round(Number((quantity / totalSalesByCategory) * 100)),
+    }))
+    .sort((a, b) => b.quantity - a.quantity);
 
   return (
     <div className="flex w-full flex-col gap-4 p-5 px-10">
@@ -123,26 +175,37 @@ const Dashboard = async () => {
         </div>
       </div>
 
-      <div className="flex w-full flex-row gap-5">
-        <div className="border-accent flex w-full flex-col gap-5 rounded-xl border-2 p-5">
-          <h1 className="text-xl font-bold">Produtos mais vendidos</h1>
-          <div className="flex flex-col gap-10">
-            {mouses.map((product) => (
-              <ProductItem
-                key={product.id}
-                product={{
-                  ...product,
-                  totalPrice: computeProductTotalPrice(product),
-                }}
-                className="w-12"
-              />
-            ))}
+      <div className="flex w-full flex-row gap-5 overflow-hidden">
+        <ScrollArea className="border-accent w-full rounded-xl border-2">
+          <div className="border-accent flex w-full flex-col gap-5 overflow-hidden p-5">
+            <h1 className="text-xl font-bold">Produtos mais vendidos</h1>
+
+            <div className="flex flex-col gap-10 overflow-hidden">
+              {" "}
+              {sortedItems.map(([productName]) => {
+                const item = productMap.get(productName);
+
+                if (!item) return null;
+
+                return (
+                  <ProductItem
+                    key={item.id}
+                    product={{
+                      ...item.product,
+                      totalPrice: computeProductTotalPrice(item.product),
+                    }}
+                    category={item.product.category.name}
+                    totalSalesByProduct={salesByProduct}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className="flex w-full flex-row">
+        </ScrollArea>
+        <div className="flex w-full flex-row overflow-hidden">
           <div className="border-accent w-full rounded-xl border-2 p-5">
             <h1 className="text-xl font-bold">Categorias mais vendidas</h1>
-            <CategoriesList />
+            <CategoriesList results={result} />
           </div>
         </div>
       </div>

@@ -1,13 +1,19 @@
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ProductWithTotalPrice } from "@/helpers/product";
 import Image from "next/image";
 
 interface ProductItemProps {
   product: ProductWithTotalPrice;
-  className?: string;
+  category: string;
+  totalSalesByProduct: Record<string, number>;
 }
 
-const ProductItem = async ({ product, className }: ProductItemProps) => {
+const ProductItem = async ({
+  product,
+  category,
+  totalSalesByProduct,
+}: ProductItemProps) => {
   return (
     <div className="flex flex-row items-center justify-between">
       <div className="flex gap-3">
@@ -26,7 +32,7 @@ const ProductItem = async ({ product, className }: ProductItemProps) => {
             className="border-primary text-primary w-fit gap-2 border-2 px-3 py-3 text-sm"
             variant="outline"
           >
-            Mouses
+            {category}
           </Badge>
           <p className="text-lg">{product.name}</p>
           <p className="text-xl font-bold">
@@ -38,7 +44,9 @@ const ProductItem = async ({ product, className }: ProductItemProps) => {
         </div>
       </div>
       <div className="flex">
-        <p className="text-lg font-bold">300 vendidos</p>
+        <p className="text-lg font-bold">
+          {totalSalesByProduct[product.name] || 0} vendidos
+        </p>
       </div>
     </div>
   );
