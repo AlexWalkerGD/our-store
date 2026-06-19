@@ -125,7 +125,7 @@ prisma/          # Database schema
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/AlexWalkerGD/our-store.git
 ```
 
 ### 2. Navigate to the project folder
@@ -201,8 +201,8 @@ STRIPE_WEBHOOK_SECRET="your_stripe_webhook_secret"
 
 Developed by **Alex Walker**
 
-💼 GitHub: https://github.com/AlexWalkerGD
-📧 Email: [alexwalkerson@hotmail.com](mailto:alexwalkerson@hotmail.com)
+💼 [GitHub](https://github.com/AlexWalkerGD)  
+📧 alexwalkerson@hotmail.com
 
 ---
 
