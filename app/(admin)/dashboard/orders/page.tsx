@@ -1,5 +1,6 @@
 import OrderItem from "@/components/order-item";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { authOptions } from "@/lib/auth";
 import { prismaClient } from "@/lib/prisma";
 import { PackageSearchIcon } from "lucide-react";
@@ -27,7 +28,7 @@ const OrderPage = async () => {
   });
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col gap-4 p-5">
+    <div className="flex w-full min-w-0 flex-1 flex-col gap-4 p-5">
       <Badge
         className="border-primary w-fit gap-2 border-2 px-3 py-4 text-base uppercase"
         variant="outline"
@@ -42,10 +43,14 @@ const OrderPage = async () => {
         </p>
       </div>
 
-      <div className="flex flex-col gap-5 pt-5">
-        {orders.map((order) => (
-          <OrderItem key={order.id} order={order} />
-        ))}
+      <div className="flex w-full overflow-hidden">
+        <ScrollArea className="w-full">
+          <div className="flex w-full flex-col gap-5 p-2 pt-5">
+            {orders.map((order) => (
+              <OrderItem key={order.id} order={order} />
+            ))}
+          </div>
+        </ScrollArea>
       </div>
     </div>
   );

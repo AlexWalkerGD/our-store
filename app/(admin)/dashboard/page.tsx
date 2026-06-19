@@ -44,6 +44,16 @@ const Dashboard = async () => {
     },
   });
 
+  const totalProducts = () => {
+    return orders.reduce((orderAcc, order) => {
+      const orderTotal = order.orderProducts.reduce((productAcc, product) => {
+        return product.quantity;
+      }, 0);
+
+      return orderAcc + orderTotal;
+    }, 0);
+  };
+
   const orders = await prismaClient.order.findMany({
     where: {
       userId: (user as any).id,
@@ -61,13 +71,42 @@ const Dashboard = async () => {
     },
   });
 
-  const mouses = await prismaClient.product.findMany({
-    where: {
-      category: {
-        slug: "mouses",
-      },
-    },
-  });
+  const totalSales = () => {
+    return orders.reduce((orderAcc, order) => {
+      const orderTotal = order.orderProducts.reduce((productAcc, product) => {
+        const productTotalPrice = computeProductTotalPrice(product.product);
+
+        return productAcc + productTotalPrice * product.quantity;
+      }, 0);
+
+      return orderAcc + orderTotal;
+    }, 0);
+  };
+
+  const totalSalesToday = () => {
+    const today = new Date();
+
+    return orders
+      .filter((order) => {
+        const orderDate = new Date(order.createdAt);
+
+        return (
+          orderDate.getDate() === today.getDate() &&
+          orderDate.getMonth() === today.getMonth() &&
+          orderDate.getFullYear() === today.getFullYear()
+        );
+      })
+      .reduce((orderAcc, order) => {
+        const orderTotal = order.orderProducts.reduce((productAcc, product) => {
+          return (
+            productAcc +
+            computeProductTotalPrice(product.product) * product.quantity
+          );
+        }, 0);
+
+        return orderAcc + orderTotal;
+      }, 0);
+  };
 
   const salesByCategory: Record<string, number> = {};
 
@@ -132,22 +171,22 @@ const Dashboard = async () => {
             <Landmark size={20} />
             <p>Total da Receita</p>
           </div>
-          <h1 className="text-4xl font-bold">€ 20.000,00</h1>
+          <h1 className="text-4xl font-bold">€ {totalSales().toFixed(2)}</h1>
         </div>
         <div className="flex h-[150px] w-[650px] w-full flex-col justify-center rounded-xl bg-gradient-to-r from-[#2c2c2c] to-[#2c2c2c4f] p-5 pl-10">
           <div className="flex items-center gap-1">
             <DollarSign size={20} />
             <p>Receita hoje</p>
           </div>
-          <h1 className="text-4xl font-bold">€ 500,00</h1>
+          <h1 className="text-4xl font-bold">{totalSalesToday().toFixed(2)}</h1>
         </div>
       </div>
 
       <div className="flex w-full flex-row gap-10">
         <div className="border-accent flex w-full flex-col items-center gap-1 rounded-xl border-2 p-10">
-          <div className="flex flex-row items-center justify-center gap-1">
+          <div className="flex flex-row items-center justify-center gap-2">
             <CircleDollarSign size={20} className="text-primary" />
-            <p className="text-2xl font-bold">1100</p>
+            <p className="text-2xl font-bold">{totalProducts()}</p>
           </div>
           Total de Vendidos
         </div>
